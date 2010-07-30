@@ -106,7 +106,7 @@ module Rack
 --#{MULTIPART_BOUNDARY}\r
 Content-Disposition: form-data; name="#{parameter_name}"\r
 \r
-#{value}\r
+#{escape(value)}\r
 EOF
       end
 

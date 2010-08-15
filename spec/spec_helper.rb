@@ -4,6 +4,8 @@ require "bundler/setup"
 require "rack"
 require "rspec"
 
+Dir[File.dirname(__FILE__) + "/support/**/*.rb"].each {|f| require f}
+
 require "rack/test"
 require File.dirname(__FILE__) + "/fixtures/fake_app"
 
@@ -21,7 +23,7 @@ Rspec.configure do |config|
 
 end
 
-describe "any #verb methods", :shared => true do
+shared_examples_for "any #verb methods" do
   it "requests the URL using VERB" do
     send(verb, "/")
 

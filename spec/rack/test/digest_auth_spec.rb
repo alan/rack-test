@@ -1,6 +1,7 @@
 require "spec_helper"
 
 describe Rack::Test::Session do
+  
   context "HTTP Digest authentication" do
 
     def app
@@ -10,14 +11,6 @@ describe Rack::Test::Session do
       app.realm = 'WallysWorld'
       app.opaque = 'this-should-be-secret'
       app
-    end
-
-    def be_challenge
-      simple_matcher "a HTTP Digest challenge response" do |response|
-        response.status == 401 &&
-        response['WWW-Authenticate'] =~ /^Digest / &&
-        response.body.empty?
-      end
     end
 
     it 'incorrectly authenticates GETs' do

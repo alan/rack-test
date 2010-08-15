@@ -1,12 +1,15 @@
 require "rubygems"
-require "spec"
+require "bundler/setup"
 
-gem "rack", "~> 1.0.0"
+require "rack"
+require "rspec"
 
 require "rack/test"
 require File.dirname(__FILE__) + "/fixtures/fake_app"
 
-Spec::Runner.configure do |config|
+Rspec.configure do |config|
+  config.mock_with :rspec
+  
   config.include Rack::Test::Methods
 
   def app

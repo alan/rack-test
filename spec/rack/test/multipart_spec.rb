@@ -56,12 +56,7 @@ describe Rack::Test::Session do
     it "sends params encoded as ISO-8859-1" do
       post "/", "photo" => uploaded_file, "foo" => "bar", "utf8" => "☃"
       last_request.POST["foo"].should == "bar"
-
-      if Rack::Test.encoding_aware_strings?
-        last_request.POST["utf8"].should == "\xE2\x98\x83".force_encoding("BINARY")
-      else
-        last_request.POST["utf8"].should == "\xE2\x98\x83"
-      end
+      last_request.POST["utf8"].should == "\xE2\x98\x83"
     end
 
     it "sends params with parens in names" do
